@@ -47,7 +47,7 @@ namespace MyMoviesAPI.Services
 
 
             response.Data = _mapper.Map<GetMovieDto>(movie);
-            response.Message = "Lista filmów w bazie danych";
+            response.Message = $"Film w bazie o id: {id}";
 
             return response;
         }
