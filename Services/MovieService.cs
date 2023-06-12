@@ -109,11 +109,7 @@ namespace MyMoviesAPI.Services
                 response.Success = false;
                 response.Message = "Błąd w połączeniu z API:\n" + ex.Message;
             }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Błąd:\n" + ex.Message;
-            }
+
 
             var movies = await _context.Movies.ToListAsync();
 
