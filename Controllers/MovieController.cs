@@ -17,7 +17,7 @@ namespace MyMoviesAPI.Controllers
         }
 
         [HttpGet("/{id}")]
-        public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> GetMovies(int id)
+        public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> GetMovieById(int id)
         {
             return Ok(await _movieService.GetMovieById(id));
         }
@@ -38,6 +38,12 @@ namespace MyMoviesAPI.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> AddMovie(AddMovieDto dto)
         {
             return Ok(await _movieService.AddMovie(dto));
+        }
+
+        [HttpDelete("/{id}")]
+        public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> RemoveMovie(int id)
+        {
+            return Ok(await _movieService.RemoveMovie(id));
         }
     }
 }

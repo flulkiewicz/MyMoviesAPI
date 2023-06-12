@@ -123,6 +123,25 @@ namespace MyMoviesAPI.Services
             return response;
         }
 
-        
+        public async Task<ServiceResponse<List<GetMovieDto>>> RemoveMovie(int id)
+        {
+            var response = new ServiceResponse<List<GetMovieDto>>();
+
+            var movie = await _context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (movie == null)
+                throw new NotFoundException($"Film z id: {id} nie istnieje w bazie danych.");
+
+            _context.Movies.Remove(movie);
+            await _context.SaveChangesAsync();
+
+
+            var movies = await _context.Movies.ToListAsync();
+
+            response.Data = movies.Select(_mapper.Map<GetMovieDto>).ToList();
+            response.Message = "Lista filmów w bazie danych";
+
+            return response;
+        }
     }
 }
