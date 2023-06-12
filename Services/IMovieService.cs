@@ -7,5 +7,6 @@ namespace MyMoviesAPI.Services
     {
         Task<ServiceResponse<List<GetMovieDto>>> GetMovies();
         Task<ServiceResponse<GetMovieDto>> AddMovie(AddMovieDto movieDto);
+        Task<ServiceResponse<List<GetMovieDto>>> FetchMovies();
     }
 }

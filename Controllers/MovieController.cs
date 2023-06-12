@@ -22,6 +22,12 @@ namespace MyMoviesAPI.Controllers
             return Ok(await _movieService.GetMovies());
         }
 
+        [HttpGet("/fetch")]
+        public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> FetchMovies()
+        {
+            return Ok(await _movieService.FetchMovies());
+        }
+
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> AddMovie(AddMovieDto dto)
         {
