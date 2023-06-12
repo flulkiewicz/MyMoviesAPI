@@ -16,6 +16,12 @@ namespace MyMoviesAPI.Controllers
             _movieService = movieService;
         }
 
+        [HttpGet("/{id}")]
+        public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> GetMovies(int id)
+        {
+            return Ok(await _movieService.GetMovieById(id));
+        }
+
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<GetMovieDto>>>> GetMovies()
         {

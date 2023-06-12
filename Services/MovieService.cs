@@ -4,6 +4,7 @@ using Flurl.Http;
 using Microsoft.EntityFrameworkCore;
 using MyMoviesAPI.Data;
 using MyMoviesAPI.Dtos.MovieDtos;
+using MyMoviesAPI.Exceptions;
 using MyMoviesAPI.Models;
 using Newtonsoft.Json;
 
@@ -13,11 +14,13 @@ namespace MyMoviesAPI.Services
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public MovieService(DataContext context, IMapper mapper)
+        public MovieService(DataContext context, IMapper mapper, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<ServiceResponse<List<GetMovieDto>>> GetMovies()
@@ -27,6 +30,23 @@ namespace MyMoviesAPI.Services
             var movies = await _context.Movies.ToListAsync();
 
             response.Data = movies.Select(_mapper.Map<GetMovieDto>).ToList();
+            response.Message = "Lista filmów w bazie danych";
+
+            return response;
+        }
+
+
+        public async Task<ServiceResponse<GetMovieDto>> GetMovieById(int id)
+        {
+            var response = new ServiceResponse<GetMovieDto>();
+
+            var movie = await _context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (movie == null)
+                throw new NotFoundException($"Film z id: {id} nie istnieje w bazie danych.");
+
+
+            response.Data = _mapper.Map<GetMovieDto>(movie);
             response.Message = "Lista filmów w bazie danych";
 
             return response;
@@ -55,7 +75,7 @@ namespace MyMoviesAPI.Services
 
             try
             {
-                string apiUrl = "https://filmy.programdemo.pl/MyMovies";
+                string apiUrl = _configuration.GetSection("ExternalAPISettings").GetSection("Url").Value!;
                 var result = await apiUrl.GetAsync().ReceiveString();
 
                 if (result == null)
@@ -102,6 +122,7 @@ namespace MyMoviesAPI.Services
 
             return response;
         }
+
         
     }
 }

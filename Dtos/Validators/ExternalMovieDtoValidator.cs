@@ -15,11 +15,11 @@ namespace MyMoviesAPI.Dtos.Validators
                 .MaximumLength(200);
 
             RuleFor(x => x.Director)
-                .NotEmpty().WithMessage("Dodaj reżysera filmu.")
+                .NotEmpty()
                 .MaximumLength(40);
 
             RuleFor(x => x.Year)
-                .NotEmpty().WithMessage("Dodaj rok produkcji filmu.")
+                .NotEmpty()
                 .InclusiveBetween(1900, 2200);
 
             RuleFor(x => x.Rate)
