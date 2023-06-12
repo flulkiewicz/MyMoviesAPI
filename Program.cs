@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using MyMoviesAPI.Data;
 using MyMoviesAPI.Dtos.Validators;
+using MyMoviesAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddValidatorsFromAssemblyContaining<MovieDtoValidator>()
+builder.Services.AddValidatorsFromAssemblyContaining<GetMovieDtoValidator>()
     .AddFluentValidationAutoValidation()
     .AddFluentValidationClientsideAdapters();
 
@@ -23,9 +24,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-
-
-
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 
 var app = builder.Build();

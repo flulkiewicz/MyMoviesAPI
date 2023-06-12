@@ -9,7 +9,8 @@ namespace MyMoviesAPI
     {
         public AutoMapperProfile()
         {
-            CreateMap<Movie, MovieDto>();
+            CreateMap<Movie, GetMovieDto>();
+            CreateMap<AddMovieDto, Movie>();
         }
     }
 }
