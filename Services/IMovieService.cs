@@ -8,7 +8,8 @@ namespace MyMoviesAPI.Services
         Task<ServiceResponse<List<GetMovieDto>>> GetMovies();
         Task<ServiceResponse<GetMovieDto>> GetMovieById(int id);
         Task<ServiceResponse<List<GetMovieDto>>> RemoveMovie(int id);
-        Task<ServiceResponse<GetMovieDto>> AddMovie(AddMovieDto movieDto);
+        Task<ServiceResponse<GetMovieDto>> AddMovie(AddMovieDto addMovieDto);
+        Task<ServiceResponse<GetMovieDto>> UpdateMovie(UpdateMovieDto updateMovieDto);
         Task<ServiceResponse<List<GetMovieDto>>> FetchMovies();
     }
 }

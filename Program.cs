@@ -14,6 +14,8 @@ builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors();
+
 builder.Services.AddValidatorsFromAssemblyContaining<GetMovieDtoValidator>()
     .AddFluentValidationAutoValidation()
     .AddFluentValidationClientsideAdapters();
@@ -36,7 +38,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 }
+
+
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

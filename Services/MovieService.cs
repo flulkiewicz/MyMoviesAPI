@@ -35,7 +35,6 @@ namespace MyMoviesAPI.Services
             return response;
         }
 
-
         public async Task<ServiceResponse<GetMovieDto>> GetMovieById(int id)
         {
             var response = new ServiceResponse<GetMovieDto>();
@@ -48,6 +47,25 @@ namespace MyMoviesAPI.Services
 
             response.Data = _mapper.Map<GetMovieDto>(movie);
             response.Message = $"Film w bazie o id: {id}";
+
+            return response;
+        }
+
+        public async Task<ServiceResponse<GetMovieDto>> UpdateMovie(UpdateMovieDto updateMovieDto)
+        {
+            var response = new ServiceResponse<GetMovieDto>();
+
+            var movieId = updateMovieDto.Id;
+
+            var movie = await _context.Movies.FirstOrDefaultAsync(x => x.Id == movieId);
+
+            if (movie == null)
+                throw new NotFoundException($"Film z id: {movieId} nie istnieje w bazie danych.");
+
+            _mapper.Map(updateMovieDto, movie);
+            await _context.SaveChangesAsync();
+
+            response.Message = "Film został zaktualizowany.";
 
             return response;
         }
@@ -94,6 +112,7 @@ namespace MyMoviesAPI.Services
                     {
                         Title = externalMovie.Title,
                         Director = externalMovie.Director,
+                        Year = externalMovie.Year,
                         Rate = externalMovie.Rate,
                         ExternalId = externalMovie.Id
                     };

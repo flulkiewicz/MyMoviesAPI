@@ -11,6 +11,7 @@ namespace MyMoviesAPI
         {
             CreateMap<Movie, GetMovieDto>();
             CreateMap<AddMovieDto, Movie>();
+            CreateMap<UpdateMovieDto, Movie>();
         }
     }
 }
