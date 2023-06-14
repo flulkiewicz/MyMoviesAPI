@@ -10,9 +10,9 @@ To get frontend vue app go check: https://github.com/flulkiewicz/MyMoviesClient
 
 
 PL
-Aby zainicjowaæ API, nale¿y wykonaæ polecenie "dotnet run" w wierszu poleceñ w folderze g³ównym projektu, w którym znajduje siê plik WebApi.csproj.
+Aby zainicjowac API, nalezy wykonac polecenie "dotnet run" w wierszu polecen w folderze glÃ³wnym projektu, w ktÃ³rym znajduje sie plik WebApi.csproj.
 
-Alternatywnie, istnieje mo¿liwoœæ uruchomienia aplikacji w trybie debugowania za pomoc¹ Visual Studio. Wystarczy otworzyæ folder g³ówny projektu w Visual Studio i nacisn¹æ klawisz F5 lub przejœæ do menu "Debug" u góry i wybraæ "Rozpocznij debugowanie". Spowoduje to uruchomienie aplikacji i umo¿liwi jej debugowanie.
+Alternatywnie, istnieje mozliwosc uruchomienia aplikacji w trybie debugowania za pomoca Visual Studio. Wystarczy otworzyc folder glÃ³wny projektu w Visual Studio i nacisnac klawisz F5 lub przejsc do menu "Debug" u gÃ³ry i wybrac "Rozpocznij debugowanie". Spowoduje to uruchomienie aplikacji.
 
 
-Aplikacja frontendowa w vue znajduje siê pod linkiem : https://github.com/flulkiewicz/MyMoviesClient
+Aplikacja frontendowa napisana w vue znajduje sie pod linkiem : https://github.com/flulkiewicz/MyMoviesClient
